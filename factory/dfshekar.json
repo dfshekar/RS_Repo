@@ -1,0 +1,9 @@
+{
+	"name": "dfshekar",
+	"location": "centralindia",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "9eab4687-835a-4bc7-ba3e-5b864fac94ed",
+		"tenantId": "d532851c-0670-43bb-b12e-c17424932446"
+	}
+}
