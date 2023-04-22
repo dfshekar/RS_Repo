@@ -1,0 +1,17 @@
+{
+	"name": "LS_KV_SQL",
+	"properties": {
+		"annotations": [],
+		"type": "AzureSqlDatabase",
+		"typeProperties": {
+			"connectionString": {
+				"type": "AzureKeyVaultSecret",
+				"store": {
+					"referenceName": "AzureKeyVault1",
+					"type": "LinkedServiceReference"
+				},
+				"secretName": "SEC-STORAGEDEMOAPRIL23"
+			}
+		}
+	}
+}
