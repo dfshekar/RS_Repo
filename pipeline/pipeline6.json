@@ -64,7 +64,7 @@
 							"userProperties": [],
 							"typeProperties": {
 								"dataset": {
-									"referenceName": "DelimitedText2",
+									"referenceName": "dsforeachinput",
 									"type": "DatasetReference",
 									"parameters": {
 										"filename": {
@@ -100,7 +100,7 @@
 							"userProperties": [],
 							"typeProperties": {
 								"expression": {
-									"value": "@greater(activity('Get Metadata1').output.lastModified,variables('previouslastmodified'))",
+									"value": "@greater(formatDateTime(activity('Get Metadata2').output.lastModified,'yyyy-mm-ddThh:mm:ss'),formatDateTime(variables('previouslastmodified'),'yyyy-mm-ddThh:mm:ss'))",
 									"type": "Expression"
 								},
 								"ifTrueActivities": [
@@ -119,13 +119,33 @@
 									}
 								]
 							}
+						},
+						{
+							"name": "Set variable2",
+							"type": "SetVariable",
+							"dependsOn": [
+								{
+									"activity": "If Condition1",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
+							"userProperties": [],
+							"typeProperties": {
+								"variableName": "previouslastmodified",
+								"value": {
+									"value": "@activity('Get Metadata2').output.lastModified",
+									"type": "Expression"
+								}
+							}
 						}
 					]
 				}
 			},
 			{
-				"name": "Set variable2",
-				"type": "SetVariable",
+				"name": "Copy data1",
+				"type": "Copy",
 				"dependsOn": [
 					{
 						"activity": "ForEach1",
@@ -134,14 +154,65 @@
 						]
 					}
 				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
 				"userProperties": [],
 				"typeProperties": {
-					"variableName": "previouslastmodified",
-					"value": {
-						"value": "@activity('Get Metadata2').output.lastModified",
-						"type": "Expression"
+					"source": {
+						"type": "DelimitedTextSource",
+						"storeSettings": {
+							"type": "AzureBlobStorageReadSettings",
+							"recursive": true,
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings"
+						}
+					},
+					"sink": {
+						"type": "DelimitedTextSink",
+						"storeSettings": {
+							"type": "AzureBlobStorageWriteSettings"
+						},
+						"formatSettings": {
+							"type": "DelimitedTextWriteSettings",
+							"quoteAllText": true,
+							"fileExtension": ".csv"
+						}
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
 					}
-				}
+				},
+				"inputs": [
+					{
+						"referenceName": "dsforeachinput",
+						"type": "DatasetReference",
+						"parameters": {
+							"filename": {
+								"value": "@variables('latestfilename')",
+								"type": "Expression"
+							}
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "foreachoutput",
+						"type": "DatasetReference"
+					}
+				]
 			}
 		],
 		"variables": {
