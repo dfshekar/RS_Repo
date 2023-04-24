@@ -1,0 +1,17 @@
+{
+	"name": "LS_KV_BLOB",
+	"properties": {
+		"annotations": [],
+		"type": "AzureBlobStorage",
+		"typeProperties": {
+			"connectionString": {
+				"type": "AzureKeyVaultSecret",
+				"store": {
+					"referenceName": "AzureKeyVault1",
+					"type": "LinkedServiceReference"
+				},
+				"secretName": "SEC-STORAGEDEMOAPRIL23"
+			}
+		}
+	}
+}
