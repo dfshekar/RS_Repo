@@ -20,6 +20,7 @@
 						"storeSettings": {
 							"type": "AzureBlobStorageReadSettings",
 							"recursive": true,
+							"wildcardFileName": "india*.csv",
 							"enablePartitionDiscovery": false
 						},
 						"formatSettings": {
@@ -34,7 +35,7 @@
 						"formatSettings": {
 							"type": "DelimitedTextWriteSettings",
 							"quoteAllText": true,
-							"fileExtension": ".txt"
+							"fileExtension": ".csv"
 						}
 					},
 					"enableStaging": false,
@@ -49,13 +50,13 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "employeedatasset",
+						"referenceName": "foreachinput",
 						"type": "DatasetReference"
 					}
 				],
 				"outputs": [
 					{
-						"referenceName": "outputdataset",
+						"referenceName": "foreachoutput",
 						"type": "DatasetReference"
 					}
 				]
