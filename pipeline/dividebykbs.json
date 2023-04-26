@@ -1,5 +1,5 @@
 {
-	"name": "pipeline5",
+	"name": "dividebykbs",
 	"properties": {
 		"activities": [
 			{
@@ -24,6 +24,7 @@
 					],
 					"storeSettings": {
 						"type": "AzureBlobStorageReadSettings",
+						"recursive": true,
 						"enablePartitionDiscovery": false
 					},
 					"formatSettings": {
@@ -64,7 +65,7 @@
 							"userProperties": [],
 							"typeProperties": {
 								"dataset": {
-									"referenceName": "DelimitedText2",
+									"referenceName": "dsforeachinput",
 									"type": "DatasetReference",
 									"parameters": {
 										"filename": {
@@ -79,6 +80,7 @@
 								],
 								"storeSettings": {
 									"type": "AzureBlobStorageReadSettings",
+									"recursive": true,
 									"enablePartitionDiscovery": false
 								},
 								"formatSettings": {
@@ -103,72 +105,6 @@
 									"value": "@greater(activity('Get Metadata2').output.size,27)",
 									"type": "Expression"
 								},
-								"ifFalseActivities": [
-									{
-										"name": "Copy data2",
-										"type": "Copy",
-										"dependsOn": [],
-										"policy": {
-											"timeout": "0.12:00:00",
-											"retry": 0,
-											"retryIntervalInSeconds": 30,
-											"secureOutput": false,
-											"secureInput": false
-										},
-										"userProperties": [],
-										"typeProperties": {
-											"source": {
-												"type": "DelimitedTextSource",
-												"storeSettings": {
-													"type": "AzureBlobStorageReadSettings",
-													"recursive": true,
-													"enablePartitionDiscovery": false
-												},
-												"formatSettings": {
-													"type": "DelimitedTextReadSettings"
-												}
-											},
-											"sink": {
-												"type": "DelimitedTextSink",
-												"storeSettings": {
-													"type": "AzureBlobStorageWriteSettings"
-												},
-												"formatSettings": {
-													"type": "DelimitedTextWriteSettings",
-													"quoteAllText": true,
-													"fileExtension": ".txt"
-												}
-											},
-											"enableStaging": false,
-											"translator": {
-												"type": "TabularTranslator",
-												"typeConversion": true,
-												"typeConversionSettings": {
-													"allowDataTruncation": true,
-													"treatBooleanAsNumber": false
-												}
-											}
-										},
-										"inputs": [
-											{
-												"referenceName": "DelimitedText2",
-												"type": "DatasetReference",
-												"parameters": {
-													"filename": {
-														"value": "@activity('Get Metadata2').output.itemName",
-														"type": "Expression"
-													}
-												}
-											}
-										],
-										"outputs": [
-											{
-												"referenceName": "DelimitedText4",
-												"type": "DatasetReference"
-											}
-										]
-									}
-								],
 								"ifTrueActivities": [
 									{
 										"name": "Copy data1",
@@ -217,7 +153,7 @@
 										},
 										"inputs": [
 											{
-												"referenceName": "DelimitedText2",
+												"referenceName": "dsforeachinput",
 												"type": "DatasetReference",
 												"parameters": {
 													"filename": {
@@ -229,7 +165,7 @@
 										],
 										"outputs": [
 											{
-												"referenceName": "DelimitedText3",
+												"referenceName": "more27kb",
 												"type": "DatasetReference"
 											}
 										]
