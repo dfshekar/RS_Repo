@@ -1,0 +1,15 @@
+{
+	"name": "employeetbl",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_sqlserver",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [],
+		"typeProperties": {
+			"table": "employeetbl"
+		}
+	}
+}
