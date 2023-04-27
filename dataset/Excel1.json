@@ -22,7 +22,8 @@
 				"fileName": "country.xlsx",
 				"folderPath": "input",
 				"container": "foreach"
-			}
+			},
+			"firstRowAsHeader": true
 		},
 		"schema": []
 	}
