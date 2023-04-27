@@ -5,8 +5,9 @@
 		"annotations": [],
 		"type": "SqlServer",
 		"typeProperties": {
-			"connectionString": "integrated security=False;data source=.\\SQLEXPRESS;initial catalog=demosql;user id=shekar",
-			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiI5ODY0ODRlNS03ODA2LTQ0NWMtYmU3MS1jMjg4MzJjZjYxZGEiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
+			"connectionString": "integrated security=True;data source=.\\SQLEXPRESS;initial catalog=demosql",
+			"userName": "shekar",
+			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiI0YTE1OGYyMi1iODczLTRhMzMtYTAxNy0xZmM0YmNjNDIwYmEiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
 		},
 		"connectVia": {
 			"referenceName": "irselfhosted",
